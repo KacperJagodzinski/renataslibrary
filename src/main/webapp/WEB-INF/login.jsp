@@ -9,6 +9,8 @@
 <html>
 <head>
     <title>Title</title>
+    <jsp:include page="bootstrap.jsp"/>
+    <jsp:include page="header.jsp"/>
 </head>
 <body>
 <h1>Login jsp page</h1>
