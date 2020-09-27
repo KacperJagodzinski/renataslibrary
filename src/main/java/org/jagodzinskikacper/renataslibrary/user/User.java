@@ -22,7 +22,7 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name="user_role",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
     private Set<Role> roles;
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER)
     @JoinColumn(name="id_user")
     private List<Book> books;
 

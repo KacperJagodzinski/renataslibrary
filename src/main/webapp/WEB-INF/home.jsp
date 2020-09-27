@@ -15,20 +15,6 @@
     <jsp:include page="header.jsp"/>
 </head>
 <body>
-<sec:authorize access="isAuthenticated()">
-<form action="<c:url value="/logout"/>" method="post">
-    <input class="fa fa-id-badge" type="submit" value="Wyloguj">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
-</sec:authorize>
-<sec:authorize access="hasRole('USER')">
-    MAM ROLE USER
-</sec:authorize>
-<sec:authorize access="isAuthenticated()">
-    <p>test</p>
-    <p>Zalogowany jako: ${currentUser.username}</p>
-<%--    <sec:authentication property="username"/>--%>
-<%--    <p>Posiada role: <sec:authentication property="authorities"/></p>--%>
-</sec:authorize>
+
 </body>
 </html>
