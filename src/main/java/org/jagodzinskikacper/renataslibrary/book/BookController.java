@@ -53,7 +53,7 @@ public class BookController {
         User user = customUser.getUser();
         List<Book> bookList = user.getBooks();
         bookList.add(book);
-        userService.saveUser(user);
+        userService.updateUser(user);
         return "redirect:/";
     }
 }
