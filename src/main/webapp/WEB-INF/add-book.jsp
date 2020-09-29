@@ -12,6 +12,32 @@
     <title>Renata's Library</title>
     <jsp:include page="bootstrap.jsp"/>
     <jsp:include page="header.jsp"/>
+    <script>
+        function myFunction() {
+            // Get the checkbox
+            var checkBox = document.getElementById("ifNew");
+            // Get the output text
+            var text = document.getElementsByClassName("checked");
+
+            // If the checkbox is checked, display the output text
+            for(let i=0;i<text.length;i++){
+                if (checkBox.checked == true){
+                    if(text[i].style.display == "block"){
+                        text[i].style.display = "none"
+                    }else{
+                        text[i].style.display = "block"
+                    };
+                } else {
+                    if(text[i].style.display == "none"){
+                        text[i].style.display="block"
+                    }else{
+                        text[i].style.display = "none"
+                    };
+                }
+            }
+
+        }
+    </script>
 </head>
 <body>
 <section class="dashboard-section">
@@ -37,12 +63,21 @@
                         <form:input path="pages" type="number" min="0" class="form-control" title="pages" />
                         <form:errors path="pages"/>
                     </div>
-                    <div class="form-group">
+                    <input type="checkbox" id="ifNew" onclick="myFunction()"> <label>Nowy autor</label>
+                    <div class="form-group checked" style="display:block">
                         <form:select path="author" class="form-control">
                             <form:options items="${authors}" itemValue="id" itemLabel="fullName"/>
                         </form:select>
                         <form:errors path="author"/>
                     </div>
+<%--                    <div class="form-group checked" style="display:none">--%>
+<%--                        <form>--%>
+<%--                            <input path="newAuthor" class="form-control" placeholder="Autor" value="newAuthor"/>--%>
+<%--                            <p></p>--%>
+<%--                            <input type="submit" value="Dodaj">--%>
+<%--                        </form>--%>
+
+<%--                    </div>--%>
                     <div class="form-group">
                         <form:select path="publisher" class="form-control">
                             <form:options items="${publishers}" itemValue="id" itemLabel="name"/>

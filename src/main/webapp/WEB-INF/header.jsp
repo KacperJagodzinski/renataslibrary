@@ -17,7 +17,10 @@
                 <a class="nav-link" href="/book/add">Add book</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/walk/alllist">Third</a>
+                <a class="nav-link" href="/walk/alllist">Favourite Library</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/walk/alllist">All Books</a>
             </li>
         </ul>
         <sec:authorize access="!isAuthenticated()">

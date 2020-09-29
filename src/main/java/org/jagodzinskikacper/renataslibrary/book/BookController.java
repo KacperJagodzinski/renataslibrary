@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -37,23 +39,35 @@ public class BookController {
     public String addBookForm(Model model){
         Book book = new Book();
         List<Author> authors = authorService.findAll();
+        String newAuthor="";
         List<Publisher> publishers = publisherService.findAll();
         model.addAttribute("authors",authors);
+        model.addAttribute("newAuthor",newAuthor);
         model.addAttribute("book",book);
         model.addAttribute("publishers",publishers);
         return "add-book";
     }
 
     @PostMapping("/add")
-    public String addBook(@Valid Book book, BindingResult result,@AuthenticationPrincipal CurrentUser customUser){
+    public String addBook(@Valid Book book, BindingResult result, @AuthenticationPrincipal CurrentUser customUser, @ModelAttribute("newAuthor") String newAuthor){
         if(result.hasErrors()){
             return"add-book";
         }
+        System.out.println(newAuthor.length());
         bookService.saveBook(book);
         User user = customUser.getUser();
         List<Book> bookList = user.getBooks();
         bookList.add(book);
         userService.updateUser(user);
         return "redirect:/";
+    }
+
+    @GetMapping("/list")
+    public String bookList(Model model,@AuthenticationPrincipal CurrentUser customUser){
+
+        User user = customUser.getUser();
+        List<Book> books = user.getBooks();
+        model.addAttribute("books",books);
+        return "book-list";
     }
 }
