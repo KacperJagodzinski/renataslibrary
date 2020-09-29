@@ -26,6 +26,15 @@ public class BookService {
     List<Book> findBooksByUser(User user){
         return bookRepository.findBooksByUser(user);
     }
+    Book findBookById(Long id){
+        return bookRepository.findBookById(id);
+    }
+
+
+
+    void update(Book book){
+        bookRepository.save(book);
+    }
 
 
 }

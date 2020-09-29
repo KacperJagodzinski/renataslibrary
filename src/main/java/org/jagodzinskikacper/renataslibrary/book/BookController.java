@@ -11,10 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -35,16 +32,23 @@ public class BookController {
         this.userService = userService;
     }
 
+    @ModelAttribute("authors")
+    public List<Author> authors(){
+        return authorService.findAll();
+    }
+
+    @ModelAttribute("publishers")
+    public List<Publisher> publishers(){
+        return publisherService.findAll();
+    }
+
     @GetMapping("/add")
     public String addBookForm(Model model){
         Book book = new Book();
-        List<Author> authors = authorService.findAll();
-        String newAuthor="";
-        List<Publisher> publishers = publisherService.findAll();
-        model.addAttribute("authors",authors);
-        model.addAttribute("newAuthor",newAuthor);
+//        String newAuthor="";
+//        model.addAttribute("newAuthor",newAuthor);
         model.addAttribute("book",book);
-        model.addAttribute("publishers",publishers);
+
         return "add-book";
     }
 
@@ -66,8 +70,24 @@ public class BookController {
     public String bookList(Model model,@AuthenticationPrincipal CurrentUser customUser){
 
         User user = customUser.getUser();
-        List<Book> books = user.getBooks();
+        List<Book> books = bookService.findBooksByUser(user);
         model.addAttribute("books",books);
         return "book-list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editDog(Model model, @PathVariable Long id){
+        Book book = bookService.findBookById(id);
+        model.addAttribute(book);
+        return "book-edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editedBook(@Valid Book book, BindingResult result){
+        if(result.hasErrors()){
+            return "book-edit";
+        }
+        bookService.update(book);
+        return "redirect:/book/list";
     }
 }

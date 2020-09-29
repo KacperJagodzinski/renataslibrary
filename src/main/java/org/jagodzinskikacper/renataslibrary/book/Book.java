@@ -23,6 +23,7 @@ public class Book {
     private Category category;
     private int pages;
     @ManyToOne
+    @JoinColumn(name="id_user")
     private User user;
 
 
