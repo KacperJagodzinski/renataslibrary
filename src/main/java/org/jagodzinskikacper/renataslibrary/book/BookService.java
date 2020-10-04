@@ -35,5 +35,9 @@ public class BookService {
 
 //    void deleteOne(Long id){bookRepository.deleteById(id);}
 
+    List<Book> findBooksByUserIsNot(User user){
+        return bookRepository.findBooksByUserIsNot(user);
+    }
+
 
 }

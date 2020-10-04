@@ -39,7 +39,7 @@
                         <form:errors path="password"/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="password2" placeholder="powtórz hasło">
+                        <input type="password" class="form-control" name="password2" placeholder="powtórz hasło">
                     </div>
                     <button class="btn btn-success" type="submit">Zarejestruj</button>
                 </form:form>

@@ -96,17 +96,14 @@ public class BookController {
         Book book = bookService.findBookById(id);
         book.setIfActive(false);
         bookService.update(book);
-//        User user = customUser.getUser();
-//        List<Book> list = user.getBooks();
-//        System.out.println(list);
-//        Book book = bookService.findBookById(id);
-//        list.remove(book);
-//        user.setBooks(list);
-//        System.out.println(list);
-//        bookService.deleteOne(id);
-//        List<Book> after = user.getBooks();
-//        System.out.println(after);
-//        userService.updateUser(user);
         return"redirect:/book/list";
+    }
+
+    @GetMapping("/all")
+    public String allBooks(Model model,@AuthenticationPrincipal CurrentUser customUser){
+        User user = customUser.getUser();
+        List<Book> books = bookService.findBooksByUserIsNot(user);
+        model.addAttribute("books",books);
+        return "book-all";
     }
 }
