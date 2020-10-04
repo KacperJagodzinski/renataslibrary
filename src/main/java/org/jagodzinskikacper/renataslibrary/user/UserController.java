@@ -6,10 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -57,10 +54,17 @@ public class UserController {
 //        userService.saveUser(user);
 //        return "admin";
 //    }
-    @GetMapping("/admin")
-    @ResponseBody
-    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
-        User entityUser = customUser.getUser();
-        return "Hello " + entityUser.getUsername();
+//    @GetMapping("/admin")
+//    @ResponseBody
+//    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
+//        User entityUser = customUser.getUser();
+//        return "Hello " + entityUser.getUsername();
+//    }
+
+    @GetMapping("/user/{id}")
+    public String userPage(Model model, @PathVariable Long id){
+        User user = userService.findById(id);
+        model.addAttribute("user",user);
+        return "user-page";
     }
 }

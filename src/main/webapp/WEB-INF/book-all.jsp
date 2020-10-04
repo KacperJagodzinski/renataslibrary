@@ -35,7 +35,7 @@
                 <td>${book.publisher.name}</td>
                 <td>${book.category}</td>
                 <td>${book.pages}</td>
-                <td>${book.user.username}</td>
+                <td><a href="/user/${book.user.id}">${book.user.username}</a></td>
 
                 <td>
 <%--                    <a class="btn btn-primary" href="/user/${book.user.id}">User</a>--%>
