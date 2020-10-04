@@ -25,6 +25,5 @@ public class Book {
     @ManyToOne
     @JoinColumn(name="id_user")
     private User user;
-
-
+    private boolean ifActive;
 }

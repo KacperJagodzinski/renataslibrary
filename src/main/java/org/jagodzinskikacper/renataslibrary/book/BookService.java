@@ -18,7 +18,7 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-//    Book findByTitle(String title);
+    //    Book findByTitle(String title);
     void saveBook(Book book){
         bookRepository.save(book);
     };
@@ -29,12 +29,11 @@ public class BookService {
     Book findBookById(Long id){
         return bookRepository.findBookById(id);
     }
-
-
-
     void update(Book book){
         bookRepository.save(book);
     }
+
+//    void deleteOne(Long id){bookRepository.deleteById(id);}
 
 
 }

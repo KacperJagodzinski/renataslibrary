@@ -22,6 +22,7 @@
                     <h1 class="text-color-darker" style="color: white">Edytowanie książki</h1>
                     <form:hidden path="id"/>
                     <form:hidden path="user"/>
+                    <form:hidden path="ifActive"/>
                     <div class="form-group">
                         <form:input path="title" class="form-control"/>
                         <form:errors path="title"/>

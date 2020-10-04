@@ -32,6 +32,7 @@
         </thead>
         <tbody>
         <c:forEach items="${books}" var="book">
+            <c:if test="${book.ifActive==true}">
             <tr>
                 <td>${book.title}</td>
                 <td>${book.author.fullName}</td>
@@ -44,6 +45,7 @@
                     <a class="btn btn-danger" href="/book/delete/${book.id}">Delete</a>
                 </td>
             </tr>
+            </c:if>
         </c:forEach>
         </tbody>
     </table>
