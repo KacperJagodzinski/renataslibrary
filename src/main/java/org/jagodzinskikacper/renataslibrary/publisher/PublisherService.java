@@ -16,7 +16,12 @@ public class PublisherService {
         this.publisherRepository = publisherRepository;
     }
 
-    void savePublisher(Publisher publisher){publisherRepository.save(publisher);}
-    public List<Publisher> findAll(){return publisherRepository.findAll();}
+    void savePublisher(Publisher publisher) {
+        publisherRepository.save(publisher);
+    }
+
+    public List<Publisher> findAll() {
+        return publisherRepository.findAll();
+    }
 
 }

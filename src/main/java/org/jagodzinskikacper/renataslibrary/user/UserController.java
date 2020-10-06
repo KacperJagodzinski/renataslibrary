@@ -1,7 +1,6 @@
 package org.jagodzinskikacper.renataslibrary.user;
 
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,50 +20,35 @@ public class UserController {
 
 
     @GetMapping("/register")
-    public String registrationForm(Model model){
+    public String registrationForm(Model model) {
         User user = new User();
         model.addAttribute(user);
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid User user, BindingResult result, @RequestParam String password2){
-        if(result.hasErrors()){
+    public String registerUser(@Valid User user, BindingResult result, @RequestParam String password2) {
+        if (result.hasErrors()) {
             return "register";
         }
         User existingUser = userService.findByUserName(user.getUsername());
-        if(existingUser!=null){
-            result.addError(new FieldError("user","username","This username is taken"));
+        if (existingUser != null) {
+            result.addError(new FieldError("user", "username", "This username is taken"));
             return "register";
         }
-        if(!user.getPassword().equals(password2)){
-            result.addError(new FieldError("user","password","Passwords do not match"));
+        if (!user.getPassword().equals(password2)) {
+            result.addError(new FieldError("user", "password", "Passwords do not match"));
             return "register";
         }
         user.setPassword(user.getPassword());
         userService.saveUser(user);
         return "redirect:login";
     }
-//    @GetMapping("/create-user")
-//    @ResponseBody
-//    public String createUser() {
-//        User user = new User();
-//        user.setUsername("admin");
-//        user.setPassword("admin");
-//        userService.saveUser(user);
-//        return "admin";
-//    }
-//    @GetMapping("/admin")
-//    @ResponseBody
-//    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
-//        User entityUser = customUser.getUser();
-//        return "Hello " + entityUser.getUsername();
-//    }
 
     @GetMapping("/user/{id}")
-    public String userPage(Model model, @PathVariable Long id){
+    public String userPage(Model model, @PathVariable Long id) {
         User user = userService.findById(id);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "user-page";
     }
 }

@@ -14,25 +14,27 @@
     <jsp:include page="header.jsp"/>
     <script>
         function myFunction() {
-            // Get the checkbox
+
             var checkBox = document.getElementById("ifNew");
-            // Get the output text
+
             var text = document.getElementsByClassName("checked");
 
-            // If the checkbox is checked, display the output text
-            for(let i=0;i<text.length;i++){
-                if (checkBox.checked == true){
-                    if(text[i].style.display == "block"){
+
+            for (let i = 0; i < text.length; i++) {
+                if (checkBox.checked == true) {
+                    if (text[i].style.display == "block") {
                         text[i].style.display = "none"
-                    }else{
+                    } else {
                         text[i].style.display = "block"
-                    };
+                    }
+                    ;
                 } else {
-                    if(text[i].style.display == "none"){
-                        text[i].style.display="block"
-                    }else{
+                    if (text[i].style.display == "none") {
+                        text[i].style.display = "block"
+                    } else {
                         text[i].style.display = "none"
-                    };
+                    }
+                    ;
                 }
             }
 
@@ -48,7 +50,6 @@
                     <h1 class="text-color-darker" style="color: white">Dodawanie książki</h1>
                     <form:hidden path="id"/>
                     <div class="form-group">
-<%--                        <label>Tytuł</label>--%>
                         <form:input path="title" class="form-control" placeholder="Tytuł"/>
                         <form:errors path="title"/>
                     </div>
@@ -59,8 +60,8 @@
                         </form:select>
                         <form:errors path="category"/>
                     </div>
-                    <div class="form-group" title="pages" >
-                        <form:input path="pages" type="number" min="0" class="form-control" title="pages" />
+                    <div class="form-group" title="pages">
+                        <form:input path="pages" type="number" min="0" class="form-control" title="pages"/>
                         <form:errors path="pages"/>
                     </div>
                     <input type="checkbox" id="ifNew" onclick="myFunction()"> <label>Nowy autor</label>
@@ -70,29 +71,20 @@
                         </form:select>
                         <form:errors path="author"/>
                     </div>
-<%--                    <div class="form-group checked" style="display:none">--%>
-<%--                        <form>--%>
-<%--                            <input path="newAuthor" class="form-control" placeholder="Autor" value="newAuthor"/>--%>
-<%--                            <p></p>--%>
-<%--                            <input type="submit" value="Dodaj">--%>
-<%--                        </form>--%>
+                    <%--                    <div class="form-group checked" style="display:none">--%>
+                    <%--                        <form>--%>
+                    <%--                            <input path="newAuthor" class="form-control" placeholder="Autor" value="newAuthor"/>--%>
+                    <%--                            <p></p>--%>
+                    <%--                            <input type="submit" value="Dodaj">--%>
+                    <%--                        </form>--%>
 
-<%--                    </div>--%>
+                    <%--                    </div>--%>
                     <div class="form-group">
                         <form:select path="publisher" class="form-control">
                             <form:options items="${publishers}" itemValue="id" itemLabel="name"/>
                         </form:select>
                         <form:errors path="publisher"/>
                     </div>
-<%--                    <div class="form-group">--%>
-<%--                        <form:input path="description" type="text" class="form-control" placeholder="opis zachowan"/>--%>
-<%--                        <form:errors path="description"/>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group">--%>
-<%--                        <form:select itemValue="id" itemLabel="name"--%>
-<%--                                     path="rase.id" items="${rases}" class="form-control"/>--%>
-<%--                        <form:errors path="rase"/>--%>
-<%--                    </div>--%>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Dodaj</button>
                     </div>

@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -33,29 +32,27 @@ public class BookController {
     }
 
     @ModelAttribute("authors")
-    public List<Author> authors(){
+    public List<Author> authors() {
         return authorService.findAll();
     }
 
     @ModelAttribute("publishers")
-    public List<Publisher> publishers(){
+    public List<Publisher> publishers() {
         return publisherService.findAll();
     }
 
     @GetMapping("/add")
-    public String addBookForm(Model model){
+    public String addBookForm(Model model) {
         Book book = new Book();
-//        String newAuthor="";
-//        model.addAttribute("newAuthor",newAuthor);
-        model.addAttribute("book",book);
+        model.addAttribute("book", book);
 
         return "add-book";
     }
 
     @PostMapping("/add")
-    public String addBook(@Valid Book book, BindingResult result, @AuthenticationPrincipal CurrentUser customUser, @ModelAttribute("newAuthor") String newAuthor){
-        if(result.hasErrors()){
-            return"add-book";
+    public String addBook(@Valid Book book, BindingResult result, @AuthenticationPrincipal CurrentUser customUser, @ModelAttribute("newAuthor") String newAuthor) {
+        if (result.hasErrors()) {
+            return "add-book";
         }
         book.setIfActive(true);
         book.setIfLent(false);
@@ -68,27 +65,27 @@ public class BookController {
     }
 
     @GetMapping("/list")
-    public String bookList(Model model,@AuthenticationPrincipal CurrentUser customUser){
+    public String bookList(Model model, @AuthenticationPrincipal CurrentUser customUser) {
         User user = customUser.getUser();
         List<Book> books = bookService.findBooksByUserAndLendUserIsFalse(user);
         List<Book> lentBooks = bookService.findBooksByLendUser(user);
         List<Book> myBooksLent = bookService.findBooksByUserAndLendUserIsTrue(user);
-        model.addAttribute("lentBooks",lentBooks);
+        model.addAttribute("lentBooks", lentBooks);
         model.addAttribute("myBooksLent", myBooksLent);
-        model.addAttribute("books",books);
+        model.addAttribute("books", books);
         return "book-list";
     }
 
     @GetMapping("/edit/{id}")
-    public String editDog(Model model, @PathVariable Long id){
+    public String editDog(Model model, @PathVariable Long id) {
         Book book = bookService.findBookById(id);
         model.addAttribute(book);
         return "book-edit";
     }
 
     @PostMapping("/edit/{id}")
-    public String editedBook(@Valid Book book, BindingResult result){
-        if(result.hasErrors()){
+    public String editedBook(@Valid Book book, BindingResult result) {
+        if (result.hasErrors()) {
             return "book-edit";
         }
         bookService.update(book);
@@ -96,23 +93,23 @@ public class BookController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteBook(@PathVariable Long id,@AuthenticationPrincipal CurrentUser customUser,Model model){
+    public String deleteBook(@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser, Model model) {
         Book book = bookService.findBookById(id);
         book.setIfActive(false);
         bookService.update(book);
-        return"redirect:/book/list";
+        return "redirect:/book/list";
     }
 
     @GetMapping("/all")
-    public String allBooks(Model model,@AuthenticationPrincipal CurrentUser customUser){
+    public String allBooks(Model model, @AuthenticationPrincipal CurrentUser customUser) {
         User user = customUser.getUser();
         List<Book> books = bookService.findBooksByUserIsNot(user);
-        model.addAttribute("books",books);
+        model.addAttribute("books", books);
         return "book-all";
     }
 
     @GetMapping("/lend/{id}")
-    public String lendBook(@PathVariable Long id,@AuthenticationPrincipal CurrentUser customUser){
+    public String lendBook(@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser) {
 
         Book book = bookService.findBookById(id);
         User user = customUser.getUser();

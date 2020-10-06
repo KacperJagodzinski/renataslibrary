@@ -7,17 +7,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <head>
-      <title>Renata's Library</title>
-      <jsp:include page="bootstrap.jsp"/>
-      <jsp:include page="header.jsp"/>
+        <title>Renata's Library</title>
+        <jsp:include page="bootstrap.jsp"/>
+        <jsp:include page="header.jsp"/>
     </head>
-  </head>
-  <body>
+</head>
+<body>
 <h1>User page</h1>
-  ${user.id}
-  ${user.username}
-  ${user.books}
-  </body>
+${user.id}
+${user.username}
+${user.books}
+</body>
 </html>

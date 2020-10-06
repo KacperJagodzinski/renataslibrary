@@ -14,36 +14,43 @@ public class BookService {
     private final BookRepository bookRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository){
+    public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
-    //    Book findByTitle(String title);
-    void saveBook(Book book){
+    void saveBook(Book book) {
         bookRepository.save(book);
-    };
+    }
 
-    List<Book> findBooksByUser(User user){
+
+    List<Book> findBooksByUser(User user) {
         return bookRepository.findBooksByUser(user);
     }
-    Book findBookById(Long id){
+
+    Book findBookById(Long id) {
         return bookRepository.findBookById(id);
     }
-    void update(Book book){
+
+    void update(Book book) {
         bookRepository.save(book);
     }
 
-//    void deleteOne(Long id){bookRepository.deleteById(id);}
 
-    List<Book> findBooksByUserIsNot(User user){
+    List<Book> findBooksByUserIsNot(User user) {
         return bookRepository.findBooksByUserIsNot(user);
     }
 
-    List<Book> findBooksByLendUser(User user){return bookRepository.findBooksByLendUser(user);}
+    List<Book> findBooksByLendUser(User user) {
+        return bookRepository.findBooksByLendUser(user);
+    }
 
-    List<Book> findBooksByUserAndLendUserIsFalse(User user){ return bookRepository.findBooksByUserAndLendUserIsNull(user);}
+    List<Book> findBooksByUserAndLendUserIsFalse(User user) {
+        return bookRepository.findBooksByUserAndLendUserIsNull(user);
+    }
 
-    List<Book> findBooksByUserAndLendUserIsTrue(User user){ return bookRepository.findBooksByUserAndLendUserIsNotNull(user);}
+    List<Book> findBooksByUserAndLendUserIsTrue(User user) {
+        return bookRepository.findBooksByUserAndLendUserIsNotNull(user);
+    }
 
 
 }

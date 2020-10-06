@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Renata's Library</title>
@@ -14,44 +14,10 @@
     <jsp:include page="header.jsp"/>
 </head>
 <body>
-<h1>Wypożyczone książki</h1>
-
-<div class="mt-1">
-    <table class="table" style="background-color: white;opacity: 0.8">
-        <thead>
-        <tr>
-            <th scope="col">Właściciel</th>
-            <th scope="col">Tytuł</th>
-            <th scope="col">Autor</th>
-            <th scope="col">Wydawca</th>
-            <th scope="col">Kategoria</th>
-            <th scope="col">Stron</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${lentBooks}" var="book">
-            <c:if test="${book.ifActive==true}">
-                <tr>
-                    <td>${book.lendUser.username}</td>
-                    <td>${book.title}</td>
-                    <td>${book.author.fullName}</td>
-                    <td>${book.publisher.name}</td>
-                    <td>${book.category}</td>
-                    <td>${book.pages}</td>
-                    <td>
-                        <a class="btn btn-danger" href="/book/give/${book.id}" onclick="return confirm('Czy na pewno chcesz oddać?');">Oddaj</a>
-                    </td>
-                </tr>
-            </c:if>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
-<h1>Twoje książki</h1>
+<h1>Book List</h1>
 <div class="mt-1">
     <a href="/book/add" class="btn btn-success">Dodaj Książke</a>
 </div>
-
 <div class="mt-1">
     <table class="table" style="background-color: white;opacity: 0.8">
         <thead>
@@ -66,37 +32,6 @@
         <tbody>
         <c:forEach items="${books}" var="book">
             <c:if test="${book.ifActive==true}">
-            <tr>
-                <td>${book.title}</td>
-                <td>${book.author.fullName}</td>
-                <td>${book.publisher.name}</td>
-                <td>${book.category}</td>
-                <td>${book.pages}</td>
-                <td>
-                    <a class="btn btn-primary" href="/book/edit/${book.id}">Edytuj</a>
-                    <a class="btn btn-danger" href="/book/delete/${book.id}" onclick="return confirm('Czy na pewno chcesz usunąć?');">Usuń</a>
-                </td>
-            </tr>
-            </c:if>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
-<h1>Twoje wypożyczone książki</h1>
-<div class="mt-1">
-    <table class="table" style="background-color: white;opacity: 0.8">
-        <thead>
-        <tr>
-            <th scope="col">Tytuł</th>
-            <th scope="col">Autor</th>
-            <th scope="col">Wydawca</th>
-            <th scope="col">Kategoria</th>
-            <th scope="col">Stron</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${myBooksLent}" var="book">
-            <c:if test="${book.ifActive==true}">
                 <tr>
                     <td>${book.title}</td>
                     <td>${book.author.fullName}</td>
@@ -105,6 +40,8 @@
                     <td>${book.pages}</td>
                     <td>
                         <a class="btn btn-primary" href="/book/edit/${book.id}">Edytuj</a>
+                        <a class="btn btn-danger" href="/book/delete/${book.id}"
+                           onclick="return confirm('Czy na pewno chcesz usunąć?');">Usuń</a>
                     </td>
                 </tr>
             </c:if>

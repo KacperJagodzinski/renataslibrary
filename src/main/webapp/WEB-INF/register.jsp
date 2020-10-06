@@ -26,16 +26,8 @@
                         <form:input path="username" class="form-control" placeholder="podaj imię"/>
                         <form:errors path="username"/>
                     </div>
-<%--                    <div class="form-group">--%>
-<%--                        <form:input path="lastName" class="form-control" placeholder="podaj nazwisko"/>--%>
-<%--                        <form:errors path="lastName"/>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group">--%>
-<%--                        <form:input path="email" class="form-control" placeholder="podaj email"/>--%>
-<%--                        <form:errors path="email"/>--%>
-<%--                    </div>--%>
                     <div class="form-group">
-                        <form:password path="password" class="form-control" placeholder="podaj haslo" />
+                        <form:password path="password" class="form-control" placeholder="podaj haslo"/>
                         <form:errors path="password"/>
                     </div>
                     <div class="form-group">

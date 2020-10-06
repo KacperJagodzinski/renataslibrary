@@ -12,13 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 
     @GetMapping("/")
-    public String home(@AuthenticationPrincipal CurrentUser customUser,Model model){
-        if(customUser != null){
+    public String home(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+        if (customUser != null) {
             model.addAttribute(customUser);
         }
-        return "home";}
-
-    @GetMapping("/about")
-    @ResponseBody
-    public String about(){return "Here you can find some details for logged users";}
+        return "home";
+    }
 }

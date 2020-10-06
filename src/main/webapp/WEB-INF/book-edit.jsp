@@ -34,8 +34,8 @@
                         </form:select>
                         <form:errors path="category"/>
                     </div>
-                    <div class="form-group" title="pages" >
-                        <form:input path="pages" type="number" min="0" class="form-control" title="pages" />
+                    <div class="form-group" title="pages">
+                        <form:input path="pages" type="number" min="0" class="form-control" title="pages"/>
                         <form:errors path="pages"/>
                     </div>
                     <div class="form-group checked" style="display:block">

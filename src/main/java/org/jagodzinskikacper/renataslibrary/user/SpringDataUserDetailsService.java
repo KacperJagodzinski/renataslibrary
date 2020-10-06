@@ -12,22 +12,23 @@ import java.util.Set;
 
 public class SpringDataUserDetailsService implements UserDetailsService {
     private UserService userService;
+
     @Autowired
     public void setUserRepository(UserService userService) {
         this.userService = userService;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findByUserName(username);
-        if (user == null) {throw new UsernameNotFoundException(username); }
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         user.getRoles().forEach(r ->
                 grantedAuthorities.add(new SimpleGrantedAuthority(r.getName())));
-        UserDetails userDetails = new CurrentUser(user.getUsername(),user.getPassword(),
+        UserDetails userDetails = new CurrentUser(user.getUsername(), user.getPassword(),
                 grantedAuthorities, user);
         return userDetails;
-                //new CurrentUser(user.getUsername(),user.getPassword(),
-                //grantedAuthorities, user);
     }
 }

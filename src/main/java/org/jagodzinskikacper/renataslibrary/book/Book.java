@@ -23,11 +23,11 @@ public class Book {
     private Category category;
     private int pages;
     @ManyToOne
-    @JoinColumn(name="id_user")
+    @JoinColumn(name = "id_user")
     private User user;
     private boolean ifActive;
     private boolean ifLent;
     @ManyToOne
-    @JoinColumn(name="lendUser_id")
+    @JoinColumn(name = "lendUser_id")
     private User lendUser;
 }
