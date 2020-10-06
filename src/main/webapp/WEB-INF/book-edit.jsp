@@ -23,6 +23,7 @@
                     <form:hidden path="id"/>
                     <form:hidden path="user"/>
                     <form:hidden path="ifActive"/>
+                    <form:hidden path="ifLent"/>
                     <div class="form-group">
                         <form:input path="title" class="form-control"/>
                         <form:errors path="title"/>

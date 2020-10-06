@@ -58,6 +58,7 @@ public class BookController {
             return"add-book";
         }
         book.setIfActive(true);
+        book.setIfLent(false);
         bookService.saveBook(book);
         User user = customUser.getUser();
         List<Book> bookList = user.getBooks();
@@ -69,8 +70,11 @@ public class BookController {
     @GetMapping("/list")
     public String bookList(Model model,@AuthenticationPrincipal CurrentUser customUser){
         User user = customUser.getUser();
-        //List<Book> books = user.getBooks();
-        List<Book> books = bookService.findBooksByUser(user);
+        List<Book> books = bookService.findBooksByUserAndLendUserIsFalse(user);
+        List<Book> lentBooks = bookService.findBooksByLendUser(user);
+        List<Book> myBooksLent = bookService.findBooksByUserAndLendUserIsTrue(user);
+        model.addAttribute("lentBooks",lentBooks);
+        model.addAttribute("myBooksLent", myBooksLent);
         model.addAttribute("books",books);
         return "book-list";
     }
@@ -105,5 +109,16 @@ public class BookController {
         List<Book> books = bookService.findBooksByUserIsNot(user);
         model.addAttribute("books",books);
         return "book-all";
+    }
+
+    @GetMapping("/lend/{id}")
+    public String lendBook(@PathVariable Long id,@AuthenticationPrincipal CurrentUser customUser){
+
+        Book book = bookService.findBookById(id);
+        User user = customUser.getUser();
+        book.setIfLent(true);
+        book.setLendUser(user);
+        bookService.saveBook(book);
+        return "book-list";
     }
 }
