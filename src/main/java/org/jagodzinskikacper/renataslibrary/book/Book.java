@@ -26,4 +26,8 @@ public class Book {
     @JoinColumn(name="id_user")
     private User user;
     private boolean ifActive;
+    private boolean ifLent;
+    @ManyToOne
+    @JoinColumn(name="lendUser_id")
+    private User lendUser;
 }
