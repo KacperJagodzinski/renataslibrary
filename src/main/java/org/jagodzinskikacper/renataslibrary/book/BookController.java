@@ -67,7 +67,7 @@ public class BookController {
     @GetMapping("/list")
     public String bookList(Model model, @AuthenticationPrincipal CurrentUser customUser) {
         User user = customUser.getUser();
-        List<Book> books = bookService.findBooksByUserAndLendUserIsFalse(user);
+        List<Book> books = bookService.findBooksByUser(user);
         List<Book> lentBooks = bookService.findBooksByLendUser(user);
         List<Book> myBooksLent = bookService.findBooksByUserAndLendUserIsTrue(user);
         model.addAttribute("lentBooks", lentBooks);
