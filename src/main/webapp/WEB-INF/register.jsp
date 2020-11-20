@@ -20,7 +20,7 @@
         <div class="border-dashed view-height">
             <div class="container w-25">
                 <form:form method="post" modelAttribute="user">
-                    <h1 class="text-color-darker" style="color: white">Register</h1>
+                    <h1 class="text-color-darker" style="color: black">Rejestracja</h1>
                     <form:hidden path="id"/>
                     <div class="form-group">
                         <form:input path="username" class="form-control" placeholder="podaj imię"/>

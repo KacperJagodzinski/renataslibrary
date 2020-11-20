@@ -11,7 +11,7 @@
         crossorigin="anonymous"></script>
 <style>
     body {
-        background-color: aquamarine;
+        background-image: url("/resources/background.jpg");
         background-size: cover;
     }
 </style>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <html>
-<nav class="navbar navbar-expand-lg navbar navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Renata's Library</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,10 +31,10 @@
             <a class="btn btn-success" href="/register">Register</a>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
-            <span style="color: white">Witaj,</span>
+            <span style="color: black">Witaj,</span>
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false" style="color: white">
+                   aria-haspopup="true" aria-expanded="false" style="color: black">
                         ${currentUser.username}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
