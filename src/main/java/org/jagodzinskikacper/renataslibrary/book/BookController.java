@@ -1,7 +1,9 @@
 package org.jagodzinskikacper.renataslibrary.book;
 
-import org.jagodzinskikacper.renataslibrary.Author.Author;
-import org.jagodzinskikacper.renataslibrary.Author.AuthorService;
+import org.jagodzinskikacper.renataslibrary.author.Author;
+import org.jagodzinskikacper.renataslibrary.author.AuthorService;
+import org.jagodzinskikacper.renataslibrary.lend.Lend;
+import org.jagodzinskikacper.renataslibrary.lend.LendService;
 import org.jagodzinskikacper.renataslibrary.publisher.Publisher;
 import org.jagodzinskikacper.renataslibrary.publisher.PublisherService;
 import org.jagodzinskikacper.renataslibrary.user.CurrentUser;
@@ -14,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -23,12 +27,14 @@ public class BookController {
     private final AuthorService authorService;
     private final PublisherService publisherService;
     private final UserService userService;
+    private final LendService lendService;
 
-    public BookController(BookService bookService, AuthorService authorService, PublisherService publisherService, UserService userService) {
+    public BookController(BookService bookService, AuthorService authorService, PublisherService publisherService, UserService userService, LendService lendService) {
         this.bookService = bookService;
         this.authorService = authorService;
         this.publisherService = publisherService;
         this.userService = userService;
+        this.lendService = lendService;
     }
 
     @ModelAttribute("authors")
@@ -64,15 +70,11 @@ public class BookController {
         return "redirect:/";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/myBooks")
     public String bookList(Model model, @AuthenticationPrincipal CurrentUser customUser) {
         User user = customUser.getUser();
-        List<Book> books = bookService.findBooksByUser(user);
-        List<Book> lentBooks = bookService.findBooksByLendUser(user);
-        List<Book> myBooksLent = bookService.findBooksByUserAndLendUserIsTrue(user);
-        model.addAttribute("lentBooks", lentBooks);
-        model.addAttribute("myBooksLent", myBooksLent);
-        model.addAttribute("books", books);
+        List<Book> myBooks = bookService.findBooksByUser(user);
+        model.addAttribute("books",myBooks);
         return "book-list";
     }
 
@@ -89,7 +91,7 @@ public class BookController {
             return "book-edit";
         }
         bookService.update(book);
-        return "redirect:/book/list";
+        return "redirect:/book/myBooks";
     }
 
     @GetMapping("/delete/{id}")
@@ -97,7 +99,7 @@ public class BookController {
         Book book = bookService.findBookById(id);
         book.setIfActive(false);
         bookService.update(book);
-        return "redirect:/book/list";
+        return "redirect:/book/myBooks";
     }
 
     @GetMapping("/all")
@@ -110,12 +112,16 @@ public class BookController {
 
     @GetMapping("/lend/{id}")
     public String lendBook(@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser) {
-
-        Book book = bookService.findBookById(id);
         User user = customUser.getUser();
+        Lend lend = new Lend();
+        Book book = bookService.findBookById(id);
+        lend.setBook(book);
         book.setIfLent(true);
-        book.setLendUser(user);
-        bookService.saveBook(book);
-        return "book-list";
+        lend.setUser(user);
+        LocalDateTime now = LocalDateTime.now();
+        lend.setLentDate(now);
+        lendService.create(lend);
+        bookService.update(book);
+        return "redirect:/book/all";
     }
 }

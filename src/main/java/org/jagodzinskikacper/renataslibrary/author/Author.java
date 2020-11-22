@@ -1,4 +1,4 @@
-package org.jagodzinskikacper.renataslibrary.Author;
+package org.jagodzinskikacper.renataslibrary.author;
 
 import lombok.Getter;
 import lombok.Setter;

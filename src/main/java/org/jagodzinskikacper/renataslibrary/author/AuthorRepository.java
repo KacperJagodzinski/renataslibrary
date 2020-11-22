@@ -1,4 +1,4 @@
-package org.jagodzinskikacper.renataslibrary.Author;
+package org.jagodzinskikacper.renataslibrary.author;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

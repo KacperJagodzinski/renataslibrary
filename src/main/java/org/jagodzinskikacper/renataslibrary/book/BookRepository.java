@@ -15,11 +15,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findBooksByUserIsNot(User user);
 
-    List<Book> findBooksByLendUser(User user);
 
-    List<Book> findBooksByUserAndLendUserIsNull(User user);
-
-    List<Book> findBooksByUserAndLendUserIsNotNull(User user);
 
 
 }

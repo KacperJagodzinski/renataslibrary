@@ -2,7 +2,7 @@ package org.jagodzinskikacper.renataslibrary.book;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.jagodzinskikacper.renataslibrary.Author.Author;
+import org.jagodzinskikacper.renataslibrary.author.Author;
 import org.jagodzinskikacper.renataslibrary.publisher.Publisher;
 import org.jagodzinskikacper.renataslibrary.user.User;
 
@@ -27,7 +27,4 @@ public class Book {
     private User user;
     private boolean ifActive;
     private boolean ifLent;
-    @ManyToOne
-    @JoinColumn(name = "lendUser_id")
-    private User lendUser;
 }

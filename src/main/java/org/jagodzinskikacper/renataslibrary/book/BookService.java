@@ -40,17 +40,6 @@ public class BookService {
         return bookRepository.findBooksByUserIsNot(user);
     }
 
-    List<Book> findBooksByLendUser(User user) {
-        return bookRepository.findBooksByLendUser(user);
-    }
-
-    List<Book> findBooksByUserAndLendUserIsFalse(User user) {
-        return bookRepository.findBooksByUserAndLendUserIsNull(user);
-    }
-
-    List<Book> findBooksByUserAndLendUserIsTrue(User user) {
-        return bookRepository.findBooksByUserAndLendUserIsNotNull(user);
-    }
 
 
 }
